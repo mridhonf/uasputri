@@ -51,26 +51,33 @@ if D > 0 and S > 0 and H > 0:
     # ========================
     # ===== Grafik Output =====
     # ========================
-    st.subheader("📈 Grafik Total Biaya Persediaan (Model EOQ)")
+    st.subheader("📈 Grafik EOQ: Pemesanan, Penyimpanan & Total Biaya")
 
-    # Buat rentang Q sekitar EOQ (agar bentuk U terlihat)
+    # Rentang jumlah produksi di sekitar EOQ
     Q_min = max(1, EOQ * 0.1)
     Q_max = EOQ * 3
     Q = np.linspace(Q_min, Q_max, 200)
-    TC = (D / Q) * S + (Q / 2) * H
+
+    ordering_cost = (D / Q) * S
+    holding_cost = (Q / 2) * H
+    total_cost = ordering_cost + holding_cost
 
     EOQ_cost = (D / EOQ) * S + (EOQ / 2) * H
 
-    fig, ax = plt.subplots(figsize=(10, 5))
-    ax.plot(Q, TC, label='Total Biaya Persediaan', color='green', linewidth=2)
-    
-    # Titik EOQ
-    ax.plot(EOQ, EOQ_cost, 'ro', label="Titik EOQ")
-    ax.axvline(EOQ, color='red', linestyle='--', linewidth=1.5)
+    # Buat grafik
+    fig, ax = plt.subplots(figsize=(10, 6))
 
-    # Anotasi titik EOQ
+    ax.plot(Q, ordering_cost, label="Biaya Pemesanan", color='blue', linestyle='--')
+    ax.plot(Q, holding_cost, label="Biaya Penyimpanan", color='orange', linestyle='-.')
+    ax.plot(Q, total_cost, label="Total Biaya Persediaan", color='green', linewidth=2)
+
+    # Tambahkan titik EOQ
+    ax.plot(EOQ, EOQ_cost, 'ro', label="Titik EOQ")
+    ax.axvline(EOQ, color='red', linestyle='--', linewidth=1)
+
+    # Tambahkan label EOQ
     ax.annotate(
-        f"EOQ = {EOQ:.2f}\nBiaya Total = Rp {EOQ_cost:,.0f}",
+        f"EOQ = {EOQ:.2f}\nTotal = Rp {EOQ_cost:,.0f}",
         xy=(EOQ, EOQ_cost),
         xytext=(EOQ * 1.1, EOQ_cost * 1.05),
         arrowprops=dict(arrowstyle="->", color='black'),
@@ -79,8 +86,8 @@ if D > 0 and S > 0 and H > 0:
     )
 
     ax.set_xlabel("Jumlah Produksi Keju Potong (pack)")
-    ax.set_ylabel("Total Biaya Persediaan (Rp)")
-    ax.set_title("Kurva EOQ: Total Biaya vs Jumlah Produksi")
+    ax.set_ylabel("Biaya (Rp)")
+    ax.set_title("Kurva EOQ: Biaya Pemesanan, Penyimpanan, dan Total")
     ax.grid(True, linestyle='--', alpha=0.5)
     ax.legend()
     st.pyplot(fig)
