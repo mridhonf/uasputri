@@ -51,7 +51,7 @@ if D > 0 and S > 0 and H > 0:
     # ========================
     # ===== Grafik Output =====
     # ========================
-     st.subheader("📈 Grafik Total Biaya Persediaan (Model EOQ)")
+    st.subheader("📈 Grafik Total Biaya Persediaan (Model EOQ)")
 
     # Buat rentang Q sekitar EOQ (agar bentuk U terlihat)
     Q_min = max(1, EOQ * 0.1)
