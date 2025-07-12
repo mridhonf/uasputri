@@ -51,7 +51,7 @@ if D > 0 and S > 0 and H > 0:
     # ========================
     # ===== Grafik Output =====
     # ========================
-   st.subheader("📈 Grafik Kurva Total Biaya Persediaan")
+    st.subheader("📈 Grafik Kurva Total Biaya Persediaan")
 
     Q = np.linspace(1, D * 2, 200)
     TC = (D / Q) * S + (Q / 2) * H
