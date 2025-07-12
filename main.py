@@ -51,34 +51,36 @@ if D > 0 and S > 0 and H > 0:
     # ========================
     # ===== Grafik Output =====
     # ========================
-    st.subheader("📈 Grafik Kurva Total Biaya Persediaan")
+     st.subheader("📈 Grafik Total Biaya Persediaan (Model EOQ)")
 
-    Q = np.linspace(1, D * 2, 200)
+    # Buat rentang Q sekitar EOQ (agar bentuk U terlihat)
+    Q_min = max(1, EOQ * 0.1)
+    Q_max = EOQ * 3
+    Q = np.linspace(Q_min, Q_max, 200)
     TC = (D / Q) * S + (Q / 2) * H
+
+    EOQ_cost = (D / EOQ) * S + (EOQ / 2) * H
 
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.plot(Q, TC, label='Total Biaya Persediaan', color='green', linewidth=2)
+    
+    # Titik EOQ
+    ax.plot(EOQ, EOQ_cost, 'ro', label="Titik EOQ")
+    ax.axvline(EOQ, color='red', linestyle='--', linewidth=1.5)
 
-    # Tambahkan titik EOQ
-    EOQ_cost = (D / EOQ) * S + (EOQ / 2) * H
-    ax.plot(EOQ, EOQ_cost, 'ro')  # Titik EOQ merah
-
-    # Tambahkan garis vertikal EOQ
-    ax.axvline(EOQ, color='red', linestyle='--', linewidth=1.5, label=f'EOQ = {EOQ:.2f}')
-
-    # Tambahkan anotasi
+    # Anotasi titik EOQ
     ax.annotate(
-        f"EOQ = {EOQ:.2f}\nBiaya = Rp {EOQ_cost:,.0f}",
+        f"EOQ = {EOQ:.2f}\nBiaya Total = Rp {EOQ_cost:,.0f}",
         xy=(EOQ, EOQ_cost),
-        xytext=(EOQ + D * 0.1, EOQ_cost + H * 10),
+        xytext=(EOQ * 1.1, EOQ_cost * 1.05),
         arrowprops=dict(arrowstyle="->", color='black'),
         fontsize=10,
-        bbox=dict(boxstyle="round,pad=0.3", edgecolor='gray', facecolor='white')
+        bbox=dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="gray")
     )
 
     ax.set_xlabel("Jumlah Produksi Keju Potong (pack)")
     ax.set_ylabel("Total Biaya Persediaan (Rp)")
     ax.set_title("Kurva EOQ: Total Biaya vs Jumlah Produksi")
+    ax.grid(True, linestyle='--', alpha=0.5)
     ax.legend()
-    ax.grid(True, linestyle='--', alpha=0.6)
     st.pyplot(fig)
