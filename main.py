@@ -18,9 +18,9 @@ st.divider()
 # ========================
 with st.sidebar:
     st.header("📋 Input Parameter")
-    D = st.number_input("📦 Permintaan Tahunan (pack)", min_value=1, value=12000, step=100)
-    S = st.number_input("💰 Biaya Pemesanan / Transaksi (Rp)", min_value=1, value=100000, step=1000)
-    H = st.number_input("🏪 Biaya Penyimpanan per Pack per Tahun (Rp)", min_value=1, value=2000, step=100)
+    D = st.number_input("📦 (D) Permintaan Tahunan (pack)", min_value=1, value=12000, step=100)
+    S = st.number_input("💰 (S) Biaya Pemesanan / Transaksi (Rp)", min_value=1, value=100000, step=1000)
+    H = st.number_input("🏪 (H) Biaya Penyimpanan per Pack per Tahun (Rp)", min_value=1, value=2000, step=100)
 
     st.info("Isi parameter sesuai kondisi produksi keju potong Anda.")
 
