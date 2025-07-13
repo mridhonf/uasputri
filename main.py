@@ -41,9 +41,9 @@ with col1:
     
 with col2:
     st.subheader("💼 Rincian Biaya Tahunan")
-    st.metric("Total Biaya Pemesanan", f"Rp {total_ordering_cost:,.0f}")
-    st.metric("Total Biaya Penyimpanan", f"Rp {total_holding_cost:,.0f}")
-    st.metric("Total Biaya Persediaan", f"Rp {total_inventory_cost:,.0f}")
+    st.metric("Total Biaya Pemesanan Dalam 1 Tahun", f"Rp {total_ordering_cost:,.0f}")
+    st.metric("Total Biaya Penyimpanan Dalam 1 Tahun", f"Rp {total_holding_cost:,.0f}")
+    st.metric("Total Biaya Persediaan Dalam 1 Tahun", f"Rp {total_inventory_cost:,.0f}")
 
 st.divider()
 
