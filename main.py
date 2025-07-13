@@ -38,7 +38,7 @@ if D > 0 and S > 0 and H > 0:
     with col1:
         st.subheader("🔢 Hasil Perhitungan EOQ")
         st.success(f"Jumlah Optimal Produksi (EOQ): **{EOQ:.2f} pack**")
-        st.write(f"Frekuensi Produksi per Tahun: **{freq_order:.2f} kali**")
+        st.write(f"Total Produksi dalam 1 Tahun: **{freq_order:.2f} kali**")
     
     with col2:
         st.subheader("💼 Rincian Biaya Tahunan")
