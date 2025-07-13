@@ -27,7 +27,6 @@ with st.sidebar:
 # ========================================
 # ===== Perhitungan EOQ & Output UI =====
 # ========================================
-if D > 0 and S > 0 and H > 0:
 EOQ = np.sqrt((2 * D * S) / H)
 freq_order = D / EOQ
 total_ordering_cost = freq_order * S
